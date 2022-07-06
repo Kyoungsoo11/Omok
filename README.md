@@ -1,5 +1,5 @@
 # Omok
-###Omok with renju
+### Omok with renju
 
 2022-07-26
 -------------
