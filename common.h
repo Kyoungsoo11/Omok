@@ -10,6 +10,7 @@
 #define MAX_TURN COLUMN*ROW
 #define BLACK 1
 #define WHITE 2
+#define RENJU -1
 
 void gotoxy(int x, int y);
 void Color(int back, int text);
