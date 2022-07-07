@@ -11,4 +11,4 @@
 -------------
 1. Visualize board
 2. Set a condition to prevent overlap
-3. print scripts about the turn and winner
+3. print scripts about the turns and winner
