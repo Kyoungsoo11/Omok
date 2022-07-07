@@ -1,12 +1,24 @@
 #include "common.h"
-//to do:
-//menu
-//	instruction, start, introduce me
-//renju rule
-//interface
-//
+//todo list:
+// menu
+// // instruction, start, introduce me
+// renju rule
+// // 3X3, 4X4
+// // to write on go_board
+// setting stones(input position)
+void renju(int d[ROW][COLUMN])//RENJU: -1
+{
+	int i, j;
 
-void print_matrix(int d[ROW][COLUMN])//to do: print map
+	for (i = 0; i < COLUMN; i++)//X axis
+	{
+		for (j = 0; j < ROW; j++)//Y axis (j,i)
+		{
+
+		}
+	}
+}
+void print_board(int d[ROW][COLUMN], int t)//t: turn, (·)○●Ⅹ
 {
 	int i, j;
 	int x = 30, y = 5;//set position
@@ -15,14 +27,56 @@ void print_matrix(int d[ROW][COLUMN])//to do: print map
 		gotoxy(x, y);
 		for (j = 0; j < ROW; j++)
 		{
-			printf("%d ", d[j][i]);
+			switch (t)
+			{
+			case 1://after black turn
+				switch (d[j][i])
+				{
+				case 0:
+				case RENJU:
+					Color(6, 0);
+					printf("·");
+					break;
+				case BLACK:
+					Color(6, 0);
+					printf("●");
+					break;
+				case WHITE:
+					Color(6, 15);
+					printf("●");
+					break;
+				}
+				break;
+			case 0://after white turn (= black turn)
+				switch (d[j][i])
+				{
+				case 0:
+					Color(6, 0);
+					printf("·");
+					break;
+				case BLACK:
+					Color(6, 0);
+					printf("●");
+					break;
+				case WHITE:
+					Color(6, 15);
+					printf("●");
+					break;
+				case RENJU:
+					Color(6, 12);
+					printf("Ⅹ");
+					break;
+				}
+				break;
+			}
 		}
 		y++;
 	}
+	Color(0, 15);
 }
 int deter_w(int d[ROW][COLUMN], int x, int y, int t)// t: turn, Based on the last stone
 {
-	int i, result = 0;
+	int result = 0;
 	switch (t)
 	{
 	case 1://black turn
@@ -122,30 +176,50 @@ int deter_w(int d[ROW][COLUMN], int x, int y, int t)// t: turn, Based on the las
 }
 int main(void)
 {
-	int i, turn, result, go_board[ROW][COLUMN] = { 0 };
+	int i, turn, result, wrong = 0, go_board[ROW][COLUMN] = { 0 };
 	int x, y;
 	for (i = 1; i <= MAX_TURN; i++)
 	{
 		turn = i % 2;
-		gotoxy(0, i - 1);
+	stone:
+		gotoxy(0, i+ 2*wrong - 1);//printing turn
 		switch (turn)
 		{
 		case 1://black turn
 			printf("Black Turn(%d): ", i);
 			scanf("%d %d", &x, &y);
-			go_board[x][y] = BLACK;
-			print_matrix(go_board);
+			if (!(go_board[x][y]))
+			{
+				go_board[x][y] = BLACK;
+				print_board(go_board, turn);
+			}
+			else
+			{
+				printf("Wrong position!\n");
+				wrong++;
+				goto stone;
+			}
 			break;
 		case 0://white turn
 			printf("White Turn(%d): ", i);
 			scanf("%d %d", &x, &y);
-			go_board[x][y] = WHITE;
-			print_matrix(go_board);
+			if (go_board[x][y] != BLACK && go_board[x][y] != WHITE)
+			{
+				go_board[x][y] = WHITE;
+				print_board(go_board, turn);
+			}
+			else
+			{
+				printf("Wrong position!\n");
+				wrong++;
+				goto stone;
+			}
 			break;
 		}
 		result = deter_w(go_board, x, y, turn);
-		if (result)
+		if (result)//(result != 0)
 		{
+			gotoxy(0, i + 2 * wrong);//print winner
 			switch (result)
 			{
 			case BLACK:
