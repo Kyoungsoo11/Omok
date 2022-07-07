@@ -6,3 +6,9 @@
 2. Add gotoxy, color function
 3. Printing the board(matrix)
 4. Determine if winning condition, print ending script and connect to end program
+
+2022-07-27
+-------------
+1. aaa
+2. aaa
+3. bbb
