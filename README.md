@@ -9,6 +9,5 @@
 
 2022-07-27
 -------------
-1. aaa
-2. aaa
-3. bbb
+1. Visualize board
+2. Set a condition to prevent overlap
