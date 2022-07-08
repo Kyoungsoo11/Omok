@@ -1,11 +1,11 @@
 #include "common.h"
 //todo list:
-// menu
-// // instruction, start, introduce me
 // renju rule
-// // 3X3, 4X4
+// // 3X3, 4X4, 6
 // // to write on go_board
 // setting stones(input position)
+// renju_rules(): renju rules description
+// credits(): introduce myself, show GitHub link
 void renju(int d[ROW][COLUMN])//RENJU: -1
 {
 	int i, j;
@@ -18,10 +18,10 @@ void renju(int d[ROW][COLUMN])//RENJU: -1
 		}
 	}
 }
-void print_board(int d[ROW][COLUMN], int t)//t: turn, (¬∑)‚óã‚óè‚Ö©
+void print_board(int d[ROW][COLUMN], int t)//t: turn, (°§)°€°‹•π
 {
 	int i, j;
-	int x = 30, y = 5;//set position
+	int x = 35, y = 5;//set position, x - 15 = centre
 	for (i = 0; i < COLUMN; i++)
 	{
 		gotoxy(x, y);
@@ -35,15 +35,15 @@ void print_board(int d[ROW][COLUMN], int t)//t: turn, (¬∑)‚óã‚óè‚Ö©
 				case 0:
 				case RENJU:
 					Color(6, 0);
-					printf("¬∑");
+					printf("°§");
 					break;
 				case BLACK:
 					Color(6, 0);
-					printf("‚óè");
+					printf("°‹");
 					break;
 				case WHITE:
 					Color(6, 15);
-					printf("‚óè");
+					printf("°‹");
 					break;
 				}
 				break;
@@ -52,19 +52,19 @@ void print_board(int d[ROW][COLUMN], int t)//t: turn, (¬∑)‚óã‚óè‚Ö©
 				{
 				case 0:
 					Color(6, 0);
-					printf("¬∑");
+					printf("°§");
 					break;
 				case BLACK:
 					Color(6, 0);
-					printf("‚óè");
+					printf("°‹");
 					break;
 				case WHITE:
 					Color(6, 15);
-					printf("‚óè");
+					printf("°‹");
 					break;
 				case RENJU:
 					Color(6, 12);
-					printf("‚Ö©");
+					printf("•π");
 					break;
 				}
 				break;
@@ -73,6 +73,17 @@ void print_board(int d[ROW][COLUMN], int t)//t: turn, (¬∑)‚óã‚óè‚Ö©
 		y++;
 	}
 	Color(0, 15);
+}
+void reset_board(int* d)
+{
+	int i, j;
+	for (i = 0; i < ROW; i++)
+	{
+		for (j = 0; j < COLUMN; j++)
+		{
+			*(d + i * COLUMN + j) = 0;
+		}
+	}
 }
 int deter_w(int d[ROW][COLUMN], int x, int y, int t)// t: turn, Based on the last stone
 {
@@ -176,11 +187,32 @@ int deter_w(int d[ROW][COLUMN], int x, int y, int t)// t: turn, Based on the las
 }
 int main(void)
 {
-	int i, turn, result, wrong = 0, go_board[ROW][COLUMN] = { 0 };
+	int i, turn, result, ch = 0, wrong = 0, go_board[ROW][COLUMN] = { 0 };
 	int x, y;
+	system("mode con cols=100 lines=30");
+	title();
+menu:
+	ch = menu();
+	switch (ch)
+	{
+	case 1:
+		goto Play_Omok;
+		break;
+	case 2:
+		goto Renju_Rules;
+		break;
+	case 3:
+		goto Credits;
+		break;
+	case 4:
+		goto Exit;
+		break;
+	}
+Play_Omok:
 	for (i = 1; i <= MAX_TURN; i++)
 	{
 		turn = i % 2;
+		print_board(go_board, turn);
 	stone:
 		gotoxy(0, i+ 2*wrong - 1);//printing turn
 		switch (turn)
@@ -229,11 +261,31 @@ int main(void)
 				printf("WHITE WIN!!");
 				break;
 			}
+			reset_board(go_board);
+			gotoxy(0, i + 2 * wrong + 1); printf("Press any key to go to menu");
+			while (1)
+			{
+				if (_kbhit())
+				{
+					result = _getch();
+					break;
+				}
+			}
 			break;
 		}
 
 	}
-	
-
+	system("cls");
+	goto menu;
+Renju_Rules:
+	renju_rules();
+	system("cls");
+	goto menu;
+Credits:
+	credits();
+	system("cls");
+	goto menu;
+Exit:
+	EXIT();
 	return 0;
 }

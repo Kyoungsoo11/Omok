@@ -14,3 +14,7 @@
 
 void gotoxy(int x, int y);
 void Color(int back, int text);
+void title(void);
+int menu(void);
+void renju_rules(void);
+void credits(void);
