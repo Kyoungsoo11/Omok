@@ -18,7 +18,7 @@ void renju(int d[ROW][COLUMN])//RENJU: -1
 		}
 	}
 }
-void print_board(int d[ROW][COLUMN], int t)//t: turn, (°§)°€°‹•π
+void print_board(int d[ROW][COLUMN], int t)//t: turn, (¬∑)‚óã‚óè‚Ö©
 {
 	int i, j;
 	int x = 35, y = 5;//set position, x - 15 = centre
@@ -35,15 +35,15 @@ void print_board(int d[ROW][COLUMN], int t)//t: turn, (°§)°€°‹•π
 				case 0:
 				case RENJU:
 					Color(6, 0);
-					printf("°§");
+					printf("¬∑");
 					break;
 				case BLACK:
 					Color(6, 0);
-					printf("°‹");
+					printf("‚óè");
 					break;
 				case WHITE:
 					Color(6, 15);
-					printf("°‹");
+					printf("‚óè");
 					break;
 				}
 				break;
@@ -52,19 +52,19 @@ void print_board(int d[ROW][COLUMN], int t)//t: turn, (°§)°€°‹•π
 				{
 				case 0:
 					Color(6, 0);
-					printf("°§");
+					printf("¬∑");
 					break;
 				case BLACK:
 					Color(6, 0);
-					printf("°‹");
+					printf("‚óè");
 					break;
 				case WHITE:
 					Color(6, 15);
-					printf("°‹");
+					printf("‚óè");
 					break;
 				case RENJU:
 					Color(6, 12);
-					printf("•π");
+					printf("‚Ö©");
 					break;
 				}
 				break;
