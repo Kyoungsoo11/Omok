@@ -18,3 +18,8 @@
 1. Connect menu
 2. Print title and menu (ASCII arts)
 3. Reset the board After a game ends
+
+2022-07-10
+-------------
+1. Set Rules and Credit
+2. Get stone position by △◁▽▷
