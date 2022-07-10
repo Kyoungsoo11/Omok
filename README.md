@@ -22,4 +22,4 @@
 2022-07-10
 -------------
 1. Get stone position by △◁▽▷
-2. Set Rules and Credit 
+2. Print Rules and Credit 
