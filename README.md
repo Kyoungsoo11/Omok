@@ -21,5 +21,5 @@
 
 2022-07-10
 -------------
-1. Set Rules and Credit
-2. Get stone position by △◁▽▷
+1. Get stone position by △
+2. Set Rules and Credit ◁▽▷
