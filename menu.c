@@ -64,7 +64,7 @@ int menu(void)
             Color(15, 0);
             gotoxy(x - 11, y + 1); printf("     1. Play Omok     ");//22
             Color(0, 15);
-            gotoxy(x - 11, y + 3); printf("    2. Renju rules    ");
+            gotoxy(x - 11, y + 3); printf("       2. Rules       ");
             gotoxy(x - 11, y + 5); printf("      3. Credits      ");
             gotoxy(x - 11, y + 7); printf("     4. Exit Game     ");
             gotoxy(x - 11, y + 9); printf("Press Enter to decide ");
@@ -73,7 +73,7 @@ int menu(void)
             
             gotoxy(x - 11, y + 1); printf("     1. Play Omok     ");//22
              Color(15, 0);
-            gotoxy(x - 11, y + 3); printf("    2. Renju rules    ");
+            gotoxy(x - 11, y + 3); printf("       2. Rules       ");
             Color(0, 15);
             gotoxy(x - 11, y + 5); printf("      3. Credits      ");
             gotoxy(x - 11, y + 7); printf("     4. Exit Game     ");
@@ -81,7 +81,7 @@ int menu(void)
             break;
         case 3:
             gotoxy(x - 11, y + 1); printf("     1. Play Omok     ");//22
-            gotoxy(x - 11, y + 3); printf("    2. Renju rules    ");
+            gotoxy(x - 11, y + 3); printf("       2. Rules       ");
             Color(15, 0);
             gotoxy(x - 11, y + 5); printf("      3. Credits      ");
             Color(0, 15);
@@ -91,7 +91,7 @@ int menu(void)
         case 4:
             
             gotoxy(x - 11, y + 1); printf("     1. Play Omok     ");//22
-            gotoxy(x - 11, y + 3); printf("    2. Renju rules    ");
+            gotoxy(x - 11, y + 3); printf("       2. Rules       ");
             gotoxy(x - 11, y + 5); printf("      3. Credits      ");
             Color(15, 0);
             gotoxy(x - 11, y + 7); printf("     4. Exit Game     ");
@@ -123,38 +123,45 @@ int menu(void)
 }
 void renju_rules(void)
 {
-    int ch;
-    printf("For Black: \n");
-    printf("3X3 is banned\n");
-    printf("4X4 is banned\n");
-    printf("6 is banned\n");
-    printf("Press any key to go to menu ");
+    int x = 22, y = 6;
+    gotoxy(x, y);     printf("For Black: ");
+    gotoxy(x, y + 1); printf("3X3 is banned");
+    gotoxy(x, y + 2); printf("4X4 is banned");
+    gotoxy(x, y + 3); printf("Six Stone in straight is banned");
+
+    gotoxy(x, y + 5); printf("  △   : Up");gotoxy(x + 30, y + 5); printf(" space : Put Stone");
+    gotoxy(x, y + 6); printf("◁  ▷ : Left / Right");
+    gotoxy(x, y + 7); printf("  ▽   : Down");
+   
+
+    gotoxy(x, y + 10); printf("Press any key to go to menu...");
     while (1)
     {
         if (_kbhit())
         {
-            ch = _getch();
+            _getch();
             break;
         }
     }
 }
 void credits(void)
 {
-    int ch;
-    printf("sorkaksema");
-    printf("Press any key to go to menu ");
+    int x = 22, y = 7;
+    gotoxy(x, y - 1);  printf("CREDITS");
+
+    gotoxy(x, y + 1);  printf("Developer : Kyoungsoo11"); 
+    gotoxy(x, y + 2);  printf("Created   : 2022/07/10");
+    gotoxy(x, y + 3);  printf("GitHub    : github.com/Kyoungsoo11/Omok");
+
+
+
+    gotoxy(x, y + 10); printf("Press any key to go to menu...");
     while (1)
     {
         if (_kbhit())
         {
-            ch = _getch();
+            _getch();
             break;
         }
     }
-}
-void EXIT(void)
-{
-    int ch;
-    printf("Thank you for playing\n\n");
-    exit(EXIT_SUCCESS);
 }
