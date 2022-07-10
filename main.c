@@ -3,17 +3,15 @@
 // renju rule
 // // 3X3, 4X4, 6
 // // to write on go_board
-// setting stones(input position)
-// renju_rules(): renju rules description
-// credits(): introduce myself, show GitHub link
 void renju(int d[ROW][COLUMN])//RENJU: -1
 {
-	int i, j;
-
+	int i, j, count;
 	for (i = 0; i < COLUMN; i++)//X axis
 	{
 		for (j = 0; j < ROW; j++)//Y axis (j,i)
 		{
+			count = 0;
+			//4X4
 
 		}
 	}
@@ -187,7 +185,7 @@ int deter_w(int d[ROW][COLUMN], int x, int y, int t)// t: turn, Based on the las
 }
 int main(void)
 {
-	int i, turn, result, ch = 0, wrong = 0, go_board[ROW][COLUMN] = { 0 };
+	int i, turn, result, ch = 0, go_board[ROW][COLUMN] = { 0 };
 	int x, y;
 	system("mode con cols=100 lines=30");
 	title();
@@ -209,17 +207,57 @@ menu:
 		break;
 	}
 Play_Omok:
+	x = y = 7;//center of the board
+	print_board(go_board, 1);
 	for (i = 1; i <= MAX_TURN; i++)
 	{
 		turn = i % 2;
-		print_board(go_board, turn);
 	stone:
-		gotoxy(0, i+ 2*wrong - 1);//printing turn
 		switch (turn)
 		{
 		case 1://black turn
-			printf("Black Turn(%d): ", i);
-			scanf("%d %d", &x, &y);
+			gotoxy(44, 21);
+			printf("Black Turn(%d)", i);
+			while (1)
+			{
+				gotoxy(2 * x + 35, y + 5);
+				ch = _getch();
+				if (ch == 224)
+				{
+					ch = _getch();
+					switch (ch)
+					{
+					case 72://up
+						if (y != 0)
+						{
+							y--;
+						}
+						break;
+					case 80://down
+						if (y != 14)
+						{
+							y++;
+						}
+						break;
+					case 75://left
+						if (x != 0)
+						{
+							x--;
+						}
+						break;
+					case 77://right
+						if (x != 14)
+						{
+							x++;
+						}
+						break;
+					}
+				}
+				else if (ch == ' ')
+				{
+					break;
+				}
+			}
 			if (!(go_board[x][y]))
 			{
 				go_board[x][y] = BLACK;
@@ -228,13 +266,52 @@ Play_Omok:
 			else
 			{
 				printf("Wrong position!\n");
-				wrong++;
 				goto stone;
 			}
 			break;
 		case 0://white turn
-			printf("White Turn(%d): ", i);
-			scanf("%d %d", &x, &y);
+			gotoxy(44, 21);
+			printf("White Turn(%d)", i);
+			while (1)
+			{
+				gotoxy(2 * x + 35, y + 5);
+				ch = _getch();
+				if (ch == 224)
+				{
+					ch = _getch();
+					switch (ch)
+					{
+					case 72://up
+						if (y != 0)
+						{
+							y--;
+						}
+						break;
+					case 80://down
+						if (y != 14)
+						{
+							y++;
+						}
+						break;
+					case 75://left
+						if (x != 0)
+						{
+							x--;
+						}
+						break;
+					case 77://right
+						if (x != 14)
+						{
+							x++;
+						}
+						break;
+					}
+				}
+				else if (ch == ' ')
+				{
+					break;
+				}
+			}
 			if (go_board[x][y] != BLACK && go_board[x][y] != WHITE)
 			{
 				go_board[x][y] = WHITE;
@@ -243,7 +320,6 @@ Play_Omok:
 			else
 			{
 				printf("Wrong position!\n");
-				wrong++;
 				goto stone;
 			}
 			break;
@@ -251,18 +327,18 @@ Play_Omok:
 		result = deter_w(go_board, x, y, turn);
 		if (result)//(result != 0)
 		{
-			gotoxy(0, i + 2 * wrong);//print winner
+			gotoxy(44, 21);
 			switch (result)
 			{
 			case BLACK:
-				printf("BLACK WIN!!");
+				printf("BLACK WIN!!    ");
 				break;
 			case WHITE:
-				printf("WHITE WIN!!");
+				printf("WHITE WIN!!    ");
 				break;
 			}
 			reset_board(go_board);
-			gotoxy(0, i + 2 * wrong + 1); printf("Press any key to go to menu");
+			gotoxy(37, 23); printf("Press any key to go to menu");
 			while (1)
 			{
 				if (_kbhit())
@@ -286,6 +362,6 @@ Credits:
 	system("cls");
 	goto menu;
 Exit:
-	EXIT();
+	exit(0);
 	return 0;
 }
